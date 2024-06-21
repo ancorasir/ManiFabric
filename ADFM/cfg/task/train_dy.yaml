@@ -1,0 +1,44 @@
+task_name: train_dy
+
+### Training ###
+train_mode: 'vsbl' #Should be in ["vsbl", "graph_imit", "full"] - not used anymore
+n_epoch: 100 # Number of epochs to train
+beta1: 0.9 # Beta1 for Adam optimizer
+lr: 1e-4 # Learning rate
+fixed_lr: false # Whether to use fixed learning rate
+batch_size: 16 #16 # Batch size
+cuda_idx: 0 # Cuda index
+eval: 0 # Whether to evaluate the model
+nstep_eval_rollout: 10 # Number of rollouts to evaluate
+save_model_interval: 1 # Interval to save model
+use_wandb: 0 # Whether to use wandb
+#local: true # Whether train local or remote
+output_type: 'vel' # vel or accel
+#num_workers: 8 # Number of workers for dataloader
+
+### Resume training ###
+edge_model_path: null
+full_dyn_path: null
+partial_dyn_path: null
+load_optim: false
+
+### For ablation ###
+fix_collision_edge: false
+use_collision_as_mesh_edge: false
+use_es: true
+
+# model achitecture
+global_size: 128 #Number of hidden nodes for global in GNN
+#n_his: ${..n_his} # Number of history step input to the dynamics
+proc_layer: 10 # Number of propagation layers
+state_dim: 21 # Dim of node feature input. Computed based on n_his: 3 x 5 + 1 dist to shape + 3 vector to env shape + 2 one-hot encoding of picked particle
+relation_dim: 6 # Dim of edge feature input: 3 for directional vector + 1 for directional vector magnitude + 2 for one-hot encoding of mesh or collision edge + 1 for rest distance ( not used anymore)
+
+### For graph imitation ###
+vsbl_lr: 1e-4
+full_lr: 1e-4
+tune_teach: false
+copy_teach: ['encoder', 'decoder']
+imit_w_lat: 1
+imit_w: 5
+reward_w: 1e5
