@@ -1,4 +1,6 @@
-<h1> One fling to goal: environment-aware dynamics for goal-conditioned fabric flinging</h1>
+<h1> One Fling to Goal: Environment-aware Dynamics for Goal-conditioned Fabric Flinging</h1>
+
+[PDF](https://arxiv.org/pdf/2406.14136)
 
 # Table of Contents
 - 1 [Simulation](#simulation)
@@ -11,6 +13,12 @@
 # Simulation
 
 ## Setup
+
+This project is based on softgym simulation, consider to follow the [SoftGym](https://danieltakeshi.github.io/2021/02/20/softgym/) setup.
+
+You can clone an individual [softgym](https://github.com/Xingyu-Lin/softgym) to build the pyflex(C++ part). We do not revise the pyflex part in this project. But you have to use the softgym python part in this project(especially the [envs](softgym%2Fsoftgym%2Fenvs) folder) to run the simulation.
+
+```commandline
 
 - Create conda env
 ```commandline
@@ -61,9 +69,10 @@ export PATH="/home/yang/anaconda3/bin:$PATH"
 - back to ubuntu, add these to the .bashrc
 
 ```commandline
-export PYFLEXROOT=${PROJECT_DIR}/PyFlex
-export PYTHONPATH=${PYFLEXROOT}/bindings/build:$PYTHONPATH
-export LD_LIBRARY_PATH=${PYFLEXROOT}/external/SDL2-2.0.4/lib/x64:$LD_LIBRARY_PATH
+echo 'export PYFLEXROOT=${PROJECT_DIR}/PyFlex' >> ~/.bashrc
+echo 'export PYTHONPATH=${PYFLEXROOT}/bindings/build:$PYTHONPATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=${PYFLEXROOT}/external/SDL2-2.0.4/lib/x64:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 - install other packages
@@ -101,11 +110,15 @@ python3 main.py exp_name=gen_data task=gen_data dataf=./data/data_general log_di
 
 - train generalized dynamic model 
 ```commandline
-python3 main.py exp_name=train_dy task=train_dy dataf=./data/data_general log_dir=./data/data_general/train_dy gen_gif=1 n_rollout=10000 cached_states_path=adfm_general.pkl num_variations=1000 env_shape=random task.use_wandb=true
+python3 main.py exp_name=train_dy task=train_dy dataf=./data/data_general log_dir=./data/data_general/train_dy gen_gif=1 n_rollout=10000 cached_states_path=adfm_general.pkl num_variations=1000 env_shape=random task.use_wandb=false
+```
+
+- plan
+```commandline
+python3 main.py exp_name=plan task=plan dataf=./data/data_general log_dir=./data/plan/ cached_states_path=adfm_all.pkl num_variations=20 env_shape=all task.partial_dyn_path=./data/data_general/train_dy/vsbl_dyn_best.pth vary_cloth_size=true vary_stiffness=true vary_orientation=true vary_mass=true
 ```
 
 # Real Robot
-
 
 ## Real Setup
 1. [Install ROS Noetic](https://wiki.ros.org/noetic/Installation/Ubuntu) (Unbuntu 20.04)
@@ -218,7 +231,8 @@ roslaunch realsense2_camera rs_camera.launch align_depth:=true
 ### To start the robot node in ROS:
 
 ```commandline
-roslaunch robot_control dual_arms.launch 
+roslaunch robot_control ur10e.launch 
+roslaunch robot_control ur16e.launch 
 roslaunch robot_control gripper_ur16e.launch 
 roslaunch robot_control gripper_ur10e.launch 
 ```
@@ -257,3 +271,14 @@ https://youtrack.jetbrains.com/issue/PY-64588/Debugger-error-with-OmegaConf-pack
 
 # References
 If you run into problems setting up SoftGym, Daniel Seita wrote a nice blog that may help you get started on SoftGym: https://danieltakeshi.github.io/2021/02/20/softgym/
+
+# Citation
+If you find this work useful, please consider citing:
+```
+@article{yang2024one,
+  title={One Fling to Goal: Environment-aware Dynamics for Goal-conditioned Fabric Flinging},
+  author={Yang, Linhan and Yang, Lei and Sun, Haoran and Zhang, Zeqing and He, Haibin and Wan, Fang and Song, Chaoyang and Pan, Jia},
+  journal={arXiv preprint arXiv:2406.14136},
+  year={2024}
+}
+```

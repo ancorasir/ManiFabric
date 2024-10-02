@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-  <include file="$(find robotiq_2f_gripper_action_server)/launch/robotiq_2f_gripper_as_client.launch">
-    <arg name="gripper_name" value="ur16e_gripper"/>
-    <arg name="port" value="/tmp/ttyUR16"/>
-  </include>
-
-</launch>

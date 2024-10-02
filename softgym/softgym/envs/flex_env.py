@@ -76,6 +76,7 @@ class FlexEnv(gym.Env):
         if not cached_states_path.startswith('/'):
             cur_dir = osp.dirname(osp.abspath(__file__))
             cached_states_path = osp.join(cur_dir, '../cached_initial_states', cached_states_path)
+            os.makedirs(osp.dirname(cached_states_path), exist_ok=True)
         if self.use_cached_states and osp.exists(cached_states_path):
             # Load from cached file
             with open(cached_states_path, "rb") as handle:
