@@ -1,0 +1,23 @@
+task_name: train_edge
+
+### Training ###
+n_epoch: 1000 # Number of epochs to train
+beta1: 0.9 # Beta1 for Adam optimizer
+lr: 1e-4 # Learning rate
+batch_size: 16 # Batch size
+cuda_idx: 0 # Cuda index
+num_workers: 8 # Number of workers for dataloader
+eval: 0 # Whether to evaluate the model
+save_model_interval: 1 # Interval to save model
+use_wandb: 0 # Whether to use wandb
+plot_num: 8 # Number of edge prediction visuals to dump per training epoch
+local: true # Whether train local or remote
+
+### Resume training ###
+edge_model_path: null
+load_optim: false
+
+global_size: 128 #Number of hidden nodes for global in GNN
+proc_layer: 10 # Number of propagation layers
+state_dim: 3 # Dim of node feature input. Computed based on n_his: 3 x 5 + 1 dist to ground + 2 one-hot encoding of picked particle
+relation_dim: 4 # Dim of edge feature input

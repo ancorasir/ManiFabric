@@ -1,0 +1,7 @@
+README.md
+setup.py
+FabricMani.egg-info/PKG-INFO
+FabricMani.egg-info/SOURCES.txt
+FabricMani.egg-info/dependency_links.txt
+FabricMani.egg-info/requires.txt
+FabricMani.egg-info/top_level.txt

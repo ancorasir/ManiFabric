@@ -1,0 +1,48 @@
+# ur3_dual robot configuration
+# Osaka University, Japan
+# NOTE: left and right sides are defined from the ur3_dual robot's perspective
+
+# Ref:
+# self.body.loc_flange_pose_list[0] = [np.array([.0, .258485281374, 1.61051471863]), # ur3_left
+# 									 rm.rotmat_from_euler(-3.0 * np.pi / 4.0, 0, 0)]
+# self.body.loc_flange_pose_list[1] = [np.array([.0, -.258485281374, 1.61051471863]), # ur3_right
+# 									 rm.rotmat_from_euler(3.0 * np.pi / 4.0, 0, 0) @
+# 									 rm.rotmat_from_euler(0, 0, np.pi)]
+
+# self.lft_arm.home_conf = np.array([np.pi / 12.0, -np.pi * 1.0 / 3.0, -np.pi * 2.0 / 3.0, -np.pi, -np.pi * 2.0 / 3.0, 0])
+# self.rgt_arm.home_conf = np.array([-np.pi / 12, -np.pi * 2.0 / 3.0, np.pi * 2.0 / 3.0, 0, np.pi * 2.0 / 3.0, np.pi])
+# TCP pose (XYZ,Rx,Ry,Rz) in robot base frame
+# lft: 0.17636593498270353, -0.030902131890278607, 0.27766119772854425, 0.729, 1.758, 1.765
+# rgt: -0.17439347081017964, -0.024978755690019644, 0.2819716253333231, 3.938, 1.668, -1.620
+
+robot_left:
+  robot_name: "ur3_left"
+  init_pose: [0.295, 0.311, 0.103, 0.0, 0.3756404, 0.9181996, -0.1257133] # quat (x, y, z, w)
+  robot_to_origin:
+    translation: [.0, .258485281374, 1.61051471863]
+    rotation: [-2.35619449, 0, 0] # in sxyz order. 3/4*pi = 2.35619449
+  picker_to_ee:
+    translation: [0, 0, 0.165]
+    rotation: [ 0, 0, 0 ] # in sxyz order
+
+robot_right:
+  robot_name: "ur3_right"
+  init_pose: [-0.17439347081017964, -0.024978755690019644, 0.2819716253333231, 0.64974537,  0.27520957, -0.26728987, -0.65623683] # quat (x, y, z, w)
+  robot_to_origin:
+    translation: [.0, -.258485281374, 1.61051471863]
+    rotation: [-2.35619449, 0, -3.14159265] # in sxyz order
+  picker_to_ee:
+    translation: [0, 0, 0.165]
+    rotation: [ 0, 0, 0 ] # in sxyz order
+
+camera_to_robot_left: # calibration between camera and left robot (i.e., ur3_right in Osaka University)
+    translation: [1.08932, 0.178698, -0.45717]
+    rotation: [0.745371,  0.786137, -1.585381]  # in sxyz order
+
+# camera_to_ur3_left: # calibration between camera and ur3_left robot
+#     translation: [-1.10107, 0.0723441, -0.533646]
+#     rotation: [0.787875, -0.773789,  1.552931]  # in sxyz order
+
+# camera_to_ur3_right: # calibration between camera and ur3_right robot
+#     translation: [1.08932, 0.178698, -0.45717]
+#     rotation: [0.745371,  0.786137, -1.585381]  # in sxyz order

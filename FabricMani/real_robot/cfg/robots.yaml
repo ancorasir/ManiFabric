@@ -1,0 +1,25 @@
+# ur10e+ur16e robot configuration
+# Center, HKSTP, Hong Kong
+robot_left:
+  robot_name: "ur10e"
+  init_pose: [0.4, 0.1, 0.8, 0.7071, -0.7071, 0, 0]
+  robot_to_origin:
+    translation: [ 0.1, -0.5875, 0 ]
+    rotation: [ 0, 0, 1.5707 ] # in sxyz order
+  picker_to_ee:
+    translation: [0, 0, 0.165]
+    rotation: [ 0, 0, 0 ] # in sxyz order
+
+robot_right:
+  robot_name: "ur16e"
+  init_pose: [0.4, -0.1, 0.8, 0.7071, -0.7071, 0, 0]
+  robot_to_origin:
+    translation: [ 0.1, 0.5875, 0 ]
+    rotation: [ 0, 0, -1.5707 ] # in sxyz order
+  picker_to_ee:
+    translation: [0, 0, 0.165]
+    rotation: [ 0, 0, 0 ] # in sxyz order
+
+camera_to_robot_left: # calibration between camera and robot
+    translation: [0.566043, -1.25072, 1.00271]
+    rotation: [-2.31764, 0.02144, -0.047645]  # in sxyz order

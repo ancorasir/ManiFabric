@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Launch the first robot (left) -->
+  <include file="$(find robot_control)/launch/ur3_left.launch">
+    <arg name="robot_ip" value="10.2.0.50"/>
+  </include>
+
+  <!-- Launch the second robot (right) -->
+  <include file="$(find robot_control)/launch/ur3_right.launch">
+    <arg name="robot_ip" value="10.2.0.51"/>
+  </include>
+
+</launch>
